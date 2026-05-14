@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="de-AT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Gricht | Burger Bar Bad Aussee</title>
+    <meta name="description" content="Modern Alpine Gastropub in Bad Aussee. Premium Burger, Salate und Craft Drinks.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Zilla+Slab:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           CSS CUSTOM PROPERTIES
+           ========================================================================== */
+        :root {
+            /* Colour Palette */
+            --color-bg: #F9F7F2;
+            --color-surface: #EFEBE1;
+            --color-text: #2C2A28;
+            --color-text-muted: #6B6661;
+            --color-accent: #D9534F;
+            --color-accent-hover: #C9433F;
+            --color-accent-light: #E6A122;
+            --color-footer-bg: #1A1918;
+            --color-footer-text: #F9F7F2;
+            --color-footer-text-muted: #A39E99;
+
+            /* Typography */
+            --font-heading: 'Zilla Slab', serif;
+            --font-body: 'Inter', sans-serif;
+
+            /* Fluid Type Scale */
+            --text-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+            --text-sm: clamp(0.875rem, 1.8vw, 1rem);
+            --text-base: clamp(1rem, 2vw, 1.125rem);
+            --text-lg: clamp(1.125rem, 2.5vw, 1.375rem);
+            --text-xl: clamp(1.375rem, 3vw, 1.75rem);
+            --text-2xl: clamp(1.75rem, 4vw, 2.5rem);
+            --text-3xl: clamp(2.25rem, 5vw, 3.5rem);
+            --text-4xl: clamp(3rem, 7vw, 4.5rem);
+            --text-5xl: clamp(3.5rem, 8vw, 5.5rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --section-padding: clamp(4rem, 10vw, 8rem);
+
+            /* Z-Index */
+            --z-base: 0;
+            --z-raised: 10;
+            --z-dropdown: 100;
+            /* Sticky, Overlay, Toggle use literal numbers per rules */
+            --z-modal: 2000;
+            --z-toast: 3000;
+        }
+
+        /* ==========================================================================
+           RESET & BASE
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        /* ==========================================================================
+           UTILITIES
+           ========================================================================== */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .text-muted { color: var(--color-text-muted); }
+        .text-accent { color: var(--color-accent); }
+        
+        .badge {
+            display: inline-block;
+            background-color: var(--color-accent-light);
+            color: var(--color-text);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.2em 0.6em;
+            border-radius: 2px;
+            vertical-align: middle;
+            margin-left: var(--space-2);
+        }
+
+        [data-lucide] {
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+            line-height: 1;
+            pointer-events: none;
+            width: 1.2em;
+            height: 1.2em;
+        }
+
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45em;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            font-weight: 500;
+            font-size: var(--text-base);
+            border-radius: 2px;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: var(--z-raised);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-surface);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-accent);
+            color: white;
+            padding: 8px;
+            z-index: 9999;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+
+        /* ==========================================================================
+           HEADER & NAVIGATION
+           ========================================================================== */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001; /* CRITICAL */
+            background-color: transparent;
+            transition: background-color 0.3s ease, padding 0.3s ease;
+            padding: var(--space-6) 0;
+        }
+
+        .site-header.scrolled {
+            background-color: var(--color-bg);
+            padding: var(--space-4) 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: var(--text-2xl);
+            letter-spacing: -0.04em;
+            position: relative;
+            z-index: 1003; /* Above overlay */
+        }
+
+        /* Desktop Nav */
+        .desktop-nav {
+            display: none;
+        }
+
+        .desktop-nav ul {
+            display: flex;
+            gap: var(--space-8);
+            align-items: center;
+        }
+
+        .desktop-nav a {
+            font-weight: 500;
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Mobile Nav Toggle */
+        .nav-toggle {
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1002; /* CRITICAL */
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-text);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Mobile Overlay */
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000; /* CRITICAL */
+            background-color: var(--color-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-overlay.is-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .mobile-nav a {
+            font-family: var(--font-heading);
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            padding: 1rem 0;
+            display: block;
+        }
+
+        @media (min-width: 769px) {
+            .nav-toggle { display: none; pointer-events: none; }
+            .desktop-nav { display: block; }
+        }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px; /* Offset for header */
+            padding-bottom: var(--space-12);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: var(--text-5xl);
+            margin-bottom: var(--space-6);
+        }
+
+        .hero-subtitle {
+            font-size: var(--text-xl);
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-8);
+            max-width: 90%;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            height: 50vh;
+            min-height: 400px;
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Decorative offset block */
+        .hero-image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-surface);
+            z-index: -1;
+            transform: translate(20px, 20px);
+            border-radius: 4px;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-16);
+            }
+            .hero-image-wrapper {
+                height: 75vh;
+            }
+        }
+
+        /* ==========================================================================
+           SPECIALS SECTION
+           ========================================================================== */
+        .section {
+            padding: var(--section-padding) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-16);
+        }
+
+        .section-title {
+            font-size: var(--text-4xl);
+        }
+
+        .specials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-8);
+        }
+
+        .card {
+            background-color: var(--color-surface);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-image {
+            height: 280px;
+            width: 100%;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: var(--space-6);
+        }
+
+        .card-title {
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-2);
+        }
+
+        @media (min-width: 768px) {
+            .specials-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ==========================================================================
+           ABOUT SECTION (Asymmetric)
+           ========================================================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            align-items: center;
+        }
+
+        .about-image {
+            height: 400px;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            padding: var(--space-8);
+            background-color: #fff; /* Slight contrast from bg */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+            margin-top: -4rem; /* Overlap on mobile */
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-title {
+            font-size: var(--text-3xl);
+            margin-bottom: var(--space-6);
+        }
+
+        @media (min-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 5fr 7fr;
+                gap: 0;
+            }
+            .about-content {
+                margin-top: 0;
+                margin-left: -4rem; /* Overlap on desktop */
+                padding: var(--space-12);
+            }
+            .about-image {
+                height: 600px;
+            }
+        }
+
+        /* ==========================================================================
+           MENU SECTION
+           ========================================================================== */
+        .menu-section {
+            background-color: var(--color-surface);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-16);
+        }
+
+        .menu-category-title {
+            font-size: var(--text-3xl);
+            margin-bottom: var(--space-8);
+            border-bottom: 2px solid var(--color-text);
+            padding-bottom: var(--space-2);
+            display: inline-block;
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item-header {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-2);
+            width: 100%;
+        }
+
+        .menu-item-name {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: var(--text-lg);
+        }
+
+        .menu-item-dots {
+            flex-grow: 1;
+            border-bottom: 2px dotted var(--color-text-muted);
+            opacity: 0.3;
+            position: relative;
+            top: -4px;
+        }
+
+        .menu-item-price {
+            font-weight: 500;
+            font-size: var(--text-lg);
+            color: var(--color-accent);
+        }
+
+        .menu-item-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            margin-top: var(--space-1);
+            max-width: 85%;
+        }
+
+        @media (min-width: 1024px) {
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-16) var(--space-24);
+            }
+        }
+
+        /* ==========================================================================
+           GALLERY SECTION
+           ========================================================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-4);
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .gallery-item {
+                height: 300px;
+            }
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 2;
+                height: 100%;
+            }
+        }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        .site-footer {
+            background-color: var(--color-footer-bg);
+            color: var(--color-footer-text);
+            padding: clamp(4rem, 8vw, 7rem) 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            margin-bottom: var(--space-16);
+        }
+
+        .footer-col h3 {
+            color: var(--color-footer-text);
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-6);
+        }
+
+        .footer-text {
+            color: var(--color-footer-text-muted);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-2);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+        }
+
+        .social-links a {
+            color: var(--color-footer-text);
+            opacity: 0.8;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            color: var(--color-accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            font-size: var(--text-xs);
+            color: var(--color-footer-text-muted);
+            text-align: center;
+        }
+
+        .footer-legal-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-6);
+        }
+
+        .footer-legal-links button {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        .footer-legal-links button:hover {
+            color: var(--color-footer-text);
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+
+        /* ==========================================================================
+           MODALS & OVERLAYS
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: var(--z-modal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: var(--space-4);
+        }
+
+        .modal-overlay.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Lightbox specific */
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        /* Standard Modal Card */
+        .modal-card {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            width: 100%;
+            max-width: 480px;
+            border-radius: 4px;
+            padding: var(--space-8);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.is-active .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            color: var(--color-text-muted);
+            padding: 0.5rem;
+        }
+
+        .modal-close:hover {
+            color: var(--color-accent);
+        }
+
+        .modal-title {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-4);
+        }
+
+        .modal-body p {
+            margin-bottom: var(--space-4);
+        }
+
+        .modal-body a {
+            color: var(--color-accent);
+            text-decoration: underline;
+            display: block;
+            margin-bottom: var(--space-2);
+        }
+
+        /* ==========================================================================
+           COOKIE BANNER
+           ========================================================================== */
+        .cookie-banner {
+            position: fixed;
+            bottom: var(--space-4);
+            left: var(--space-4);
+            right: var(--space-4);
+            background-color: var(--color-surface);
+            padding: var(--space-6);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: var(--z-toast);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            transform: translateY(150%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cookie-banner.is-visible {
+            transform: translateY(0);
+        }
+
+        .cookie-text {
+            font-size: var(--text-sm);
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: var(--space-4);
+        }
+
+        @media (min-width: 768px) {
+            .cookie-banner {
+                max-width: 400px;
+                left: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- DEMO NOTICE BANNER - benedictjaros.com -->
+<style>
+#__demo_spacer{display:block;}
+#__demo_notice,#__demo_notice *{box-sizing:border-box;margin:0;padding:0;}
+#__demo_notice{
+  position:fixed;top:0;left:0;right:0;z-index:99999;
+  background:rgba(9,9,11,.97);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+#__demo_inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 44px 0 18px;min-height:38px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+#__demo_dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:#f5c842;box-shadow:0 0 7px rgba(245,200,66,.55);}
+#__demo_label{color:#f5c842;font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;flex-shrink:0;}
+#__demo_divider{color:rgba(255,255,255,.15);font-size:12px;flex-shrink:0;}
+#__demo_text{color:rgba(255,255,255,.45);font-size:11.5px;line-height:1.45;flex:1 1 160px;}
+#__demo_links{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+#__demo_links a{
+  color:rgba(255,255,255,.38);font-size:11px;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  transition:color .15s,border-color .15s;white-space:nowrap;
+}
+#__demo_links a:hover{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.4);}
+#__demo_link_sep{color:rgba(255,255,255,.15);font-size:10px;}
+#__demo_close{
+  position:absolute;right:0;top:0;bottom:0;width:40px;
+  background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,.28);font-size:16px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;
+}
+#__demo_close:hover{color:rgba(255,255,255,.7);}
+@media(max-width:560px){
+  #__demo_inner{padding:7px 44px 7px 14px;gap:6px;}
+  #__demo_text{font-size:11px;flex:1 1 100%;order:3;}
+  #__demo_dot,#__demo_label{order:1;}
+  #__demo_divider{order:2;}
+  #__demo_links{order:4;}
+}
+</style>
+<div id="__demo_spacer"></div>
+<div id="__demo_notice" role="banner" aria-label="Demo notice">
+  <div id="__demo_inner">
+    <span id="__demo_dot"></span>
+    <span id="__demo_label">Demo</span>
+    <span id="__demo_divider">/</span>
+    <span id="__demo_text">Unofficial remake &mdash; not the real website. All content &amp; trademarks belong to their owners.</span>
+    <div id="__demo_links">
+      <a href="https://benedictjaros.com/impressum" target="_blank" rel="noopener noreferrer">Impressum</a>
+      <span id="__demo_link_sep">&middot;</span>
+      <a href="https://benedictjaros.com/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz</a>
+    </div>
+  </div>
+  <button id="__demo_close" aria-label="Close demo notice">&#x2715;</button>
+</div>
+<script>
+(function () {
+  var spacer = document.getElementById('__demo_spacer');
+  var b = document.getElementById('__demo_notice');
+  var x = document.getElementById('__demo_close');
+  if (!b || !spacer) return;
+  function sync() { spacer.style.height = b.offsetHeight + 'px'; }
+  function hide() {
+    b.style.display = 'none'; spacer.style.height = '0';
+    try { sessionStorage.setItem('__demo_closed', '1'); } catch (e) {}
+  }
+  try { if (sessionStorage.getItem('__demo_closed')) { b.style.display = 'none'; spacer.style.height = '0'; return; } } catch (e) {}
+  sync();
+  window.addEventListener('resize', function () { if (b.style.display !== 'none') sync(); });
+  if (x) x.addEventListener('click', hide);
+}());
+</script>
+
+
+    <a href="#main" class="skip-link">Zum Inhalt springen</a>
+
+    <!-- HEADER -->
+    <header class="site-header" id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo-text">s'Gricht</a>
+
+            <nav class="desktop-nav" aria-label="Hauptnavigation">
+                <ul>
+                    <li><a href="#specials">Specials</a></li>
+                    <li><a href="#about">Philosophie</a></li>
+                    <li><a href="#menu">Speisekarte</a></li>
+                    <li><a href="#gallery">Galerie</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+
+            <button class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen" aria-controls="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="mobile-overlay" id="mobile-menu" aria-hidden="true">
+        <nav class="mobile-nav" aria-label="Mobile Navigation">
+            <ul>
+                <li><a href="#specials">Specials</a></li>
+                <li><a href="#about">Philosophie</a></li>
+                <li><a href="#menu">Speisekarte</a></li>
+                <li><a href="#gallery">Galerie</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main id="main">
+        <!-- HERO -->
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <h1 class="hero-title reveal">Willkommen im s'Gricht</h1>
+                    <p class="hero-subtitle reveal" style="--i:1">Burger, Salate und mehr in Bad Aussee. Regional, frisch und verdammt gut.</p>
+                    <div class="reveal" style="--i:2">
+                        <a href="#menu" class="btn btn-primary">
+                            Zur Speisekarte <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper reveal" style="--i:3">
+                    <img src="https://sgricht.at/Content/img/slides/Burger_1.jpg" alt="Ein saftiger Burger vom s'Gricht" fetchpriority="high">
+                </div>
+            </div>
+        </section>
+
+        <!-- SPECIALS -->
+        <section class="section" id="specials">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Aktuelle Specials</h2>
+                </div>
+                <div class="specials-grid">
+                    <!-- Card 1 -->
+                    <article class="card reveal" style="--i:0">
+                        <div class="card-image">
+                            <img src="https://sgricht.at/Content/img/slides/slideshow01.jpg" alt="Bärlauchburger" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Bärlauchburger <span class="badge">Saisonal</span></h3>
+                            <p class="text-muted text-sm">Mit knusprigem Speck, Spiegelei und frischem Bärlauch aus der Region.</p>
+                        </div>
+                    </article>
+                    <!-- Card 2 -->
+                    <article class="card reveal" style="--i:1">
+                        <div class="card-image">
+                            <img src="https://sgricht.at/Content/img/drink.jpg" alt="Havana Verde" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Havana Verde <span class="badge">Neu</span></h3>
+                            <p class="text-muted text-sm">Erfrischender Havana Verde gemixt mit Premium Tonic Water.</p>
+                        </div>
+                    </article>
+                    <!-- Card 3 -->
+                    <article class="card reveal" style="--i:2">
+                        <div class="card-image">
+                            <img src="https://sgricht.at/Content/img/limoncello_spritz.jpg" alt="Malfy Gin Spritz" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Malfy Gin Spritz</h3>
+                            <p class="text-muted text-sm">Der perfekte Begleiter für einen lauen Abend auf unserer Terrasse.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section" id="about">
+            <div class="container about-grid">
+                <div class="about-image reveal">
+                    <img src="https://sgricht.at/Content/img/gallery/gallerysee-1.jpg" alt="Blick auf den See im Ausseerland" loading="lazy">
+                </div>
+                <div class="about-content reveal" style="--i:1">
+                    <h2 class="about-title">Unsere Philosophie</h2>
+                    <p>Nachhaltigkeit und Regionalität bei der Auswahl unserer Zutaten stehen an oberster Stelle! So sichern wir den höchsten Qualitätsstandard und stellen den besten Geschmack unserer Gerichte sicher!</p>
+                    <p>Ob saftiges Rindfleisch von heimischen Bauern oder frisches Gemüse aus der Umgebung – wir wissen, wo's herkommt.</p>
+                    <p class="text-muted text-sm" style="margin-top: var(--space-6);"><em>Alle Gerichte können natürlich auch zum Mitnehmen vorbestellt und abgeholt werden.</em></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU -->
+        <section class="section menu-section" id="menu">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Speisekarte</h2>
+                </div>
+                <div class="menu-grid">
+                    
+                    <!-- Category 1 -->
+                    <div class="menu-category reveal" style="--i:0">
+                        <h3 class="menu-category-title">Premium Burger</h3>
+                        <div class="menu-list">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">s'Gricht Burger</span>
+                                    <span class="menu-item-dots"></span>
+                                    <span class="menu-item-price">15.90</span>
+                                </div>
+                                <p class="menu-item-desc">100% Rindfleisch, Cheddar, Speck, Röstzwiebeln, Haussauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Ausseer Cheeseburger</span>
+                                    <span class="menu-item-dots"></span>
+                                    <span class="menu-item-price">14.50</span>
+                                </div>
+                                <p class="menu-item-desc">Rindfleisch, doppelter Cheddar, Essiggurkerl, rote Zwiebeln</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veggie Traum</span>
+                                    <span class="menu-item-dots"></span>
+                                    <span class="menu-item-price">13.90</span>
+                                </div>
+                                <p class="menu-item-desc">Hausgemachtes Gemüsepatty, Grillkäse, frischer Rucola</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 2 -->
+                    <div class="menu-category reveal" style="--i:1">
+                        <h3 class="menu-category-title">Beilagen & Salate</h3>
+                        <div class="menu-list">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Steakhouse Pommes</span>
+                                    <span class="menu-item-dots"></span>
+                                    <span class="menu-item-price">4.50</span>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Süßkartoffel Pommes</span>
+                                    <span class="menu-item-dots"></span>
+                                    <span class="menu-item-price">5.50</span>
+                                </div>
+                                <p class="menu-item-desc">Mit hausgemachtem Dip nach Wahl</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Beilagensalat</span>
+                                    <span class="menu-item-dots"></span>
+                                    <span class="menu-item-price">4.90</span>
+                                </div>
+                                <p class="menu-item-desc">Bunte Blattsalate, Kirschtomaten, Hausdressing</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 3 -->
+                    <div class="menu-category reveal" style="--i:2">
+                        <h3 class="menu-category-title">Craft Drinks</h3>
+                        <div class="menu-list">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Hausgemachte Limo</span>
+                                    <span class="menu-item-dots"></span>
+                                    <span class="menu-item-price">4.80</span>
+                                </div>
+                                <p class="menu-item-desc">Zitrone-Minze oder Holunder (0.5l)</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Regionales Zwickl</span>
+                                    <span class="menu-item-dots"></span>
+                                    <span class="menu-item-price">4.50</span>
+                                </div>
+                                <p class="menu-item-desc">Vom Fass (0.5l)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="section" id="gallery">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Impressionen</h2>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item reveal" style="--i:0">
+                        <img src="https://sgricht.at/Content/img/surfandturfburger.jpg" alt="Surf and Turf Burger" loading="lazy" class="lightbox-trigger">
+                    </div>
+                    <div class="gallery-item reveal" style="--i:1">
+                        <img src="https://sgricht.at/Content/img/slides/slideshow02.jpg" alt="Burger Zubereitung" loading="lazy" class="lightbox-trigger">
+                    </div>
+                    <div class="gallery-item reveal" style="--i:2">
+                        <img src="https://sgricht.at/Content/img/gallery/gallerysee-3.jpg" alt="Ausseerland Landschaft" loading="lazy" class="lightbox-trigger">
+                    </div>
+                    <div class="gallery-item reveal" style="--i:3">
+                        <img src="https://sgricht.at/Content/img/rose_spritz.jpg" alt="Rosé Spritz" loading="lazy" class="lightbox-trigger">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-col">
+                    <a href="#" class="logo-text" style="color: var(--color-footer-text); display: inline-block; margin-bottom: 0.5rem;">s'Gricht</a>
+                    <p class="footer-text">Modern Alpine Gastropub</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Öffnungszeiten</h3>
+                    <p class="footer-text icon-text"><i data-lucide="clock"></i> Do, Fr, Sa, So, Mo</p>
+                    <p class="footer-text" style="padding-left: 1.65em;">15:00 - 24:00 Uhr</p>
+                    <p class="footer-text" style="padding-left: 1.65em; margin-top: 0.5rem;">Warme Küche bis 22:00 Uhr</p>
+                    <p class="footer-text text-accent" style="padding-left: 1.65em; margin-top: 0.5rem;">Di & Mi Ruhetag</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Kontakt</h3>
+                    <p class="footer-text icon-text"><i data-lucide="map-pin"></i> Kirchengasse 32</p>
+                    <p class="footer-text" style="padding-left: 1.65em;">A-8990 Bad Aussee</p>
+                    <p class="footer-text icon-text" style="margin-top: 0.5rem;"><i data-lucide="phone"></i> +43 660 8017317</p>
+                    <p class="footer-text icon-text"><i data-lucide="mail"></i> burger@sgricht.at</p>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 s'Gricht — All original content, images & trademarks are property of their respective owners. Website rebuilt by Benedict Jaros.</p>
+                <div class="footer-legal-links">
+                    <button class="demo-modal-trigger">Impressum</button>
+                    <button class="demo-modal-trigger">Datenschutzerklärung</button>
+                    <button class="demo-modal-trigger">AGB</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="modal-overlay" id="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Bildansicht">
+        <button class="modal-close" aria-label="Schließen"><i data-lucide="x"></i></button>
+        <div class="lightbox-content">
+            <img src="" alt="Große Bildansicht" id="lightbox-img">
+        </div>
+    </div>
+
+    <!-- DEMO NOTICE MODAL -->
+    <div class="modal-overlay" id="demo-modal" aria-hidden="true" role="dialog" aria-labelledby="demo-modal-title">
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Schließen"><i data-lucide="x"></i></button>
+            <h2 class="modal-title" id="demo-modal-title">Rechtliche Hinweise</h2>
+            <div class="modal-body">
+                <p>Diese Website ist ein Demo-Remake und wurde nicht von oder für das Unternehmen erstellt. Die Inhalte dienen ausschließlich Demonstrationszwecken. Für unsere eigenen rechtlichen Informationen:</p>
+                <a href="https://benedictjaros.com/impressum" target="_blank" rel="noopener">Impressum</a>
+                <a href="https://benedictjaros.com/datenschutz" target="_blank" rel="noopener">Datenschutz</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- COOKIE BANNER -->
+    <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie Banner">
+        <p class="cookie-text">Wir verwenden Cookies, um Ihr Erlebnis zu verbessern. Durch die Nutzung der Website stimmen Sie dem zu.</p>
+        <div class="cookie-actions">
+            <button class="btn btn-primary" id="cookie-accept" style="padding: 0.5rem 1rem; font-size: var(--text-sm);">Akzeptieren</button>
+            <button class="btn btn-secondary" id="cookie-decline" style="padding: 0.5rem 1rem; font-size: var(--text-sm);">Ablehnen</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Icons
+            lucide.createIcons();
+
+            // --- Header Scroll State ---
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }, { passive: true });
+
+            // --- Mobile Navigation ---
+            const navToggle = document.querySelector('.nav-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = mobileMenu.querySelectorAll('a');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                navToggle.setAttribute('aria-expanded', isMenuOpen);
+                
+                if (isMenuOpen) {
+                    mobileMenu.classList.add('is-open');
+                    mobileMenu.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.remove('is-open');
+                    mobileMenu.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            navToggle.addEventListener('click', toggleMenu);
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) toggleMenu();
+                });
+            });
+
+            // --- Scroll Reveal ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // --- Lightbox Modal ---
+            const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = lightboxModal.querySelector('.modal-close');
+
+            function openLightbox(src) {
+                lightboxImg.src = src;
+                lightboxModal.classList.add('is-active');
+                lightboxModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightboxModal.classList.remove('is-active');
+                lightboxModal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                setTimeout(() => { lightboxImg.src = ''; }, 300);
+            }
+
+            lightboxTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    openLightbox(trigger.src);
+                });
+            });
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxModal.addEventListener('click', (e) => {
+                if (e.target === lightboxModal) closeLightbox();
+            });
+
+            // --- Demo Notice Modal ---
+            const demoTriggers = document.querySelectorAll('.demo-modal-trigger');
+            const demoModal = document.getElementById('demo-modal');
+            const demoClose = demoModal.querySelector('.modal-close');
+
+            function openDemoModal() {
+                demoModal.classList.add('is-active');
+                demoModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDemoModal() {
+                demoModal.classList.remove('is-active');
+                demoModal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            demoTriggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openDemoModal();
+                });
+            });
+
+            demoClose.addEventListener('click', closeDemoModal);
+            demoModal.addEventListener('click', (e) => {
+                if (e.target === demoModal) closeDemoModal();
+            });
+
+            // --- Global Escape Key for Modals/Menu ---
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (isMenuOpen) toggleMenu();
+                    if (lightboxModal.classList.contains('is-active')) closeLightbox();
+                    if (demoModal.classList.contains('is-active')) closeDemoModal();
+                }
+            });
+
+            // --- Cookie Banner ---
+            const cookieBanner = document.getElementById('cookie-banner');
+            const btnAccept = document.getElementById('cookie-accept');
+            const btnDecline = document.getElementById('cookie-decline');
+
+            if (!localStorage.getItem('cookie_consent')) {
+                // Small delay to ensure smooth entrance after load
+                setTimeout(() => {
+                    cookieBanner.classList.add('is-visible');
+                }, 1000);
+            }
+
+            function handleCookieChoice(choice) {
+                localStorage.setItem('cookie_consent', choice);
+                cookieBanner.classList.remove('is-visible');
+            }
+
+            btnAccept.addEventListener('click', () => handleCookieChoice('accepted'));
+            btnDecline.addEventListener('click', () => handleCookieChoice('declined'));
+        });
+    </script>
+</body>
+</html>
